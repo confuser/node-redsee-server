@@ -5,6 +5,8 @@
 
 Helper functions for implementing a RedSee filter server via [redsee-filter](https://github.com/confuser/node-redsee-filter)
 
+See [RedSee](https://github.com/Frostcast/RedSee) for an example implementation along with a demo
+
 ## Installation
 ```
 npm install redsee-server --save
@@ -16,11 +18,10 @@ var express = require('express')
   , bodyParser = require('body-parser')
   , redis = require('redis')
   , filter = require('redsee-filter')
-  , redseeServer = require('../')
+  , redseeServer = require('redsee-server')
 
 require('redis-scanstreams')(redis)
 
-// Bootstrap for tests
 module.exports = function () {
   var app = express()
     , client = redis.createClient(null, null, { fast: true })
