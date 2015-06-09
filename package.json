@@ -1,0 +1,67 @@
+{
+  "name": "redsee-server",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org"
+  },
+  "scripts": {
+    "lint": "jshint .",
+    "checkStyle": "jscs .",
+    "pretest": "npm run-script lint && npm run-script checkStyle",
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "posttest": "./node_modules/.bin/istanbul check-coverage && rm -rf coverage",
+    "prepublish": "npm test && npm prune"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:confuser/node-redsee-server"
+  },
+  "keywords": [
+    "server",
+    "profanity",
+    "chat",
+    "swear",
+    "message",
+    "redsee",
+    "redis",
+    "url",
+    "urls",
+    "email",
+    "emails",
+    "word",
+    "words",
+    "phrase",
+    "phrases"
+  ],
+  "author": "James Mortemore <jamesmortemore@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/confuser/node-redsee-server/issues"
+  },
+  "dependencies": {
+    "async": "^1.2.0",
+    "merge-descriptors": "^1.0.0",
+    "natural": "^0.2.1",
+    "xxhash": "^0.2.2"
+  },
+  "devDependencies": {
+    "assert-diff": "^1.0.1",
+    "body-parser": "^1.12.4",
+    "coveralls": "^2.11.2",
+    "express": "^4.12.4",
+    "fakeredis": "^0.3.1",
+    "istanbul": "0.3.5",
+    "jscs": "1",
+    "jshint": "2",
+    "jshint-full-path": "0",
+    "mocha": "2",
+    "redis-scanstreams": "^1.0.3",
+    "redsee-filter": "0.0.1",
+    "supertest": "^1.0.1"
+  }
+}
