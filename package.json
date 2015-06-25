@@ -61,7 +61,7 @@
     "jshint-full-path": "0",
     "mocha": "2",
     "redis-scanstreams": "^1.0.3",
-    "redsee-filter": "0.0.1",
+    "redsee-filter": "1.1.0",
     "supertest": "^1.0.1"
   }
 }

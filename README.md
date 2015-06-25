@@ -46,6 +46,9 @@ module.exports = function () {
   app.post('/filter/word', server.routes.words.create)
   app.delete('/filter/word', server.routes.words.delete)
 
+  app.post('/filter/ascii', server.routes.ascii.create)
+  app.delete('/filter/ascii', server.routes.ascii.delete)
+
   app.redisClient = client
 
   return app

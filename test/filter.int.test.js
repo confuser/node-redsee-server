@@ -29,7 +29,7 @@ describe('Filter Integration', function () {
         .post('/filter')
         .expect(200)
         .send({ msg: 'fuck this shit' })
-        .expect('{"phrases":[],"words":[]}')
+        .expect('{"ascii":[],"phrases":[],"words":[]}')
         .end(done)
     })
 
@@ -41,7 +41,7 @@ describe('Filter Integration', function () {
         .post('/filter')
         .expect(200)
         .send({ msg: msg })
-        .expect('{"phrases":[],"words":[]}')
+        .expect('{"ascii":[],"phrases":[],"words":[]}')
         .end(function (error) {
           if (error) return done(error)
 
@@ -51,7 +51,8 @@ describe('Filter Integration', function () {
             app.redisClient.del('redsee-cache:filter:' + hash)
 
             var expected =
-            { phrases: [ ]
+            { ascii: [ ]
+            , phrases: [ ]
             , words: [ ]
             }
 

@@ -16,6 +16,7 @@ function createServer(client, filter) {
     , phrases: require('./lib/routes/phrases').bind(server)(client, filter)
     , urls: require('./lib/routes/urls').bind(server)(client, filter)
     , words: require('./lib/routes/words').bind(server)(client, filter)
+    , ascii: require('./lib/routes/ascii').bind(server)(client, filter)
     }
 
   Object.defineProperty
