@@ -53,7 +53,7 @@ describe('Words Integration', function () {
         .post('/filter/word')
         .expect(200)
         .send({ msg: [ 'fuck', 'shit', 'fuck' ], type: 'blacklist' })
-        .expect('{"success":2}')
+        .expect('{"success":3}')
         .end(done)
     })
 
@@ -109,7 +109,7 @@ describe('Words Integration', function () {
         .delete('/filter/word')
         .expect(200)
         .send({ msg: [ 'fuck', 'shit', 'fuck' ], type: 'blacklist' })
-        .expect('{"success":2}')
+        .expect('{"success":3}')
         .end(done)
     })
 
