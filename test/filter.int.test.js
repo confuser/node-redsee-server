@@ -45,10 +45,10 @@ describe('Filter Integration', function () {
         .end(function (error) {
           if (error) return done(error)
 
-          app.redisClient.get('redsee-cache:filter:' + hash, function (error, res) {
+          app.redisClient.get('testredsee-cache:filter:' + hash, function (error, res) {
             if (error) return done(error)
 
-            app.redisClient.del('redsee-cache:filter:' + hash)
+            app.redisClient.del('testredsee-cache:filter:' + hash)
 
             var expected =
             { ascii: [ ]

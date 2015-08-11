@@ -12,6 +12,8 @@ module.exports = function () {
     , client = fakeRedis.createClient(null, null, { fast: true })
     , server = redseeServer(client, filter)
 
+  client.prefix = 'test'
+
   app
     .use(bodyParser.urlencoded({ extended: true }))
     .use(bodyParser.json())
