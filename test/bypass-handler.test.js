@@ -3,7 +3,7 @@ var assert = require('assert')
 
 describe('Bypass Handler', function () {
 
-  it('handle all replacements', function (done) {
+  it('handle all replacements', function () {
     var expected =
       [ 'venice'
       , 'venlce'
@@ -49,13 +49,10 @@ describe('Bypass Handler', function () {
       , 'u£n!(£'
       ]
 
-    bypassHandler('venice', function (error, combinations) {
-      if (error) return done(error)
+    var combinations = bypassHandler('venice')
 
-      assert.deepEqual(combinations, expected)
+    assert.deepEqual(combinations, expected)
 
-      done()
-    })
   })
 
 })
