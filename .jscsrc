@@ -1,6 +1,7 @@
 { "excludeFiles":
   [ "node_modules/**"
   , "coverage"
+  , "lib/bypass-combinations.js"
   ]
 , "requireLineFeedAtFileEnd": true
 , "disallowMultipleLineBreaks": true

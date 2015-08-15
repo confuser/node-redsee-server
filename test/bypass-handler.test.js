@@ -48,8 +48,7 @@ describe('Bypass Handler', function () {
       , 'v£n!(£'
       , 'u£n!(£'
       ]
-
-    var combinations = bypassHandler('venice')
+      , combinations = bypassHandler('venice')
 
     assert.deepEqual(combinations, expected)
 
