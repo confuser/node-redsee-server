@@ -1,7 +1,17 @@
-var app = require('./bootstrap')
-  , request = require('supertest')(app())
+var bootstrap = require('./bootstrap')
+  , request
 
 describe('Words Integration', function () {
+
+  before(function (done) {
+    bootstrap(function (error, app) {
+      if (error) return done(error)
+
+      request = require('supertest')(app)
+
+      done()
+    })
+  })
 
   describe('Post', function () {
     it('should return a bad request for no sent data', function (done) {
@@ -48,12 +58,21 @@ describe('Words Integration', function () {
         .end(done)
     })
 
-    it('should return amount of words added', function (done) {
+    it('should return success if words', function (done) {
       request
         .post('/filter/word')
         .expect(200)
         .send({ msg: [ 'fuck', 'shit', 'fuck' ], type: 'blacklist' })
-        .expect('{"success":52}')
+        .expect('{"success":true}')
+        .end(done)
+    })
+
+    it('should return success if words', function (done) {
+      request
+        .post('/filter/word')
+        .expect(200)
+        .send({ msg: [ 'fuck', 'shit', 'fuck' ], type: 'whitelist' })
+        .expect('{"success":true}')
         .end(done)
     })
 
@@ -104,12 +123,21 @@ describe('Words Integration', function () {
         .end(done)
     })
 
-    it('should return amount of words deleted', function (done) {
+    it('should return success if words deleted', function (done) {
       request
         .delete('/filter/word')
         .expect(200)
         .send({ msg: [ 'fuck', 'shit', 'fuck' ], type: 'blacklist' })
-        .expect('{"success":52}')
+        .expect('{"success":true}')
+        .end(done)
+    })
+
+    it('should return success if words deleted', function (done) {
+      request
+        .delete('/filter/word')
+        .expect(200)
+        .send({ msg: [ 'fuck', 'shit', 'fuck' ], type: 'whitelist' })
+        .expect('{"success":true}')
         .end(done)
     })
 

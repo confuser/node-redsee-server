@@ -1,7 +1,17 @@
-var app = require('./bootstrap')
-  , request = require('supertest')(app())
+var bootstrap = require('./bootstrap')
+  , request
 
 describe('ASCII Integration', function () {
+
+  before(function (done) {
+    bootstrap(function (error, app) {
+      if (error) return done(error)
+
+      request = require('supertest')(app)
+
+      done()
+    })
+  })
 
   describe('Post', function () {
     it('should return a bad request for no sent data', function (done) {
@@ -30,12 +40,12 @@ describe('ASCII Integration', function () {
         .end(done)
     })
 
-    it('should return amount added', function (done) {
+    it('should return success if added', function (done) {
       request
         .post('/filter/ascii')
         .expect(200)
         .send({ msg: [ '8===', '(.)(.)' ] })
-        .expect('{"success":2}')
+        .expect('{"success":true}')
         .end(done)
     })
 
@@ -68,12 +78,12 @@ describe('ASCII Integration', function () {
         .end(done)
     })
 
-    it('should return amount of words deleted', function (done) {
+    it('should return success if words deleted', function (done) {
       request
         .delete('/filter/ascii')
         .expect(200)
         .send({ msg: [ '8===' ] })
-        .expect('{"success":1}')
+        .expect('{"success":true}')
         .end(done)
     })
 

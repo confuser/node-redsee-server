@@ -1,7 +1,17 @@
-var app = require('./bootstrap')
-  , request = require('supertest')(app())
+var bootstrap = require('./bootstrap')
+  , request
 
 describe('Url Integration', function () {
+
+  before(function (done) {
+    bootstrap(function (error, app) {
+      if (error) return done(error)
+
+      request = require('supertest')(app)
+
+      done()
+    })
+  })
 
   describe('Post', function () {
     it('should return a bad request for no sent data', function (done) {
@@ -30,12 +40,12 @@ describe('Url Integration', function () {
         .end(done)
     })
 
-    it('should return amount of urls added', function (done) {
+    it('should return success if urls added', function (done) {
       request
         .post('/filter/url')
         .expect(200)
         .send({ msg: [ 'https://google.com', '*.frostcast.net', '*.frostcast.net' ] })
-        .expect('{"success":2}')
+        .expect('{"success":true}')
         .end(done)
     })
 
@@ -77,12 +87,12 @@ describe('Url Integration', function () {
         .end(done)
     })
 
-    it('should return amount of urls deleted', function (done) {
+    it('should return success if urls deleted', function (done) {
       request
         .delete('/filter/url')
         .expect(200)
         .send({ msg: [ 'https://google.com', '*.frostcast.net', '*.frostcast.net' ] })
-        .expect('{"success":2}')
+        .expect('{"success":true}')
         .end(done)
     })
 

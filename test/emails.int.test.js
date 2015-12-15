@@ -1,7 +1,17 @@
-var app = require('./bootstrap')
-  , request = require('supertest')(app())
+var bootstrap = require('./bootstrap')
+  , request
 
 describe('Email Integration', function () {
+
+  before(function (done) {
+    bootstrap(function (error, app) {
+      if (error) return done(error)
+
+      request = require('supertest')(app)
+
+      done()
+    })
+  })
 
   describe('Post', function () {
     it('should return a bad request for no sent data', function (done) {
@@ -39,12 +49,12 @@ describe('Email Integration', function () {
         .end(done)
     })
 
-    it('should return amount of addresses added', function (done) {
+    it('should return success if addresses added', function (done) {
       request
         .post('/filter/email')
         .expect(200)
         .send({ msg: [ 'test@tst.com', 'test@test.com', 'test@tst.com' ] })
-        .expect('{"success":2}')
+        .expect('{"success":true}')
         .end(done)
     })
 
@@ -77,12 +87,12 @@ describe('Email Integration', function () {
         .end(done)
     })
 
-    it('should return amount of addresses deleted', function (done) {
+    it('should return success if addresses deleted', function (done) {
       request
         .delete('/filter/email')
         .expect(200)
         .send({ msg: [ 'test@tst.com', 'test@test.com', 'test@tst.com' ] })
-        .expect('{"success":2}')
+        .expect('{"success":true}')
         .end(done)
     })
 

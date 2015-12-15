@@ -19,8 +19,8 @@ function createServer(client, filter) {
     , ascii: require('./lib/routes/ascii').bind(server)(client, filter)
     }
 
-  Object.defineProperty
-  ( server
+  Object.defineProperty(
+    server
   , 'routes'
   , { configurable: false
     , get: function () { return routes }
